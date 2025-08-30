@@ -1,281 +1,36 @@
--- https://github.com/BloodLetters/Ash-Libs
-
-local GUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/BloodLetters/Ash-Libs/refs/heads/main/source.lua"))()
-
-
-
-GUI:CreateMain({
-
-    Name = "Ashlabs",
-
-    title = "Ashlabs GUI",
-
-    ToggleUI = "K",
-
-    WindowIcon = "home", -- you can use lucid icons
-
-    -- WindowHeight = 600, -- default height
-
-    -- WindowWidth = 800, -- default width
-
-    Theme = {
-
-        Background = Color3.fromRGB(25, 25, 35),
-
-        Secondary = Color3.fromRGB(35, 35, 45),
-
-        Accent = Color3.fromRGB(138, 43, 226),
-
-        Text = Color3.fromRGB(255, 255, 255),
-
-        TextSecondary = Color3.fromRGB(180, 180, 180),
-
-        Border = Color3.fromRGB(50, 50, 60),
-
-        NavBackground = Color3.fromRGB(20, 20, 30)
-
-    },
-
-    Blur = { -- Buggy
-
-        Enable = false, -- transparent option
-
-        value = 0.2
-
-    },
-
-    Config = { -- not implemented yet
-
-        Enabled = false,
-
-    }
-
-})
-
-
-
-local main = GUI:CreateTab("Main", "home") -- You can use IconID we didnt impleemnt lucid or any external icons
-
-
-
-GUI:CreateSection({
-
-    parent = main, 
-
-    text = "Section"
-
-})
-
-
-
-GUI:CreateButton({
-
-    parent = main, 
-
-    text = "Click Me", 
-
-    callback = function()
-
-        GUI:CreateNotify({title = "Button Clicked", description = "You clicked the button!"})
-
-    end
-
-})
-
-
-
-GUI:CreateButton({
-
-    parent = main, 
-
-    text = "Notify", 
-
-    callback = function()
-
-        GUI:CreateNotify({title = "Welcome", description = "Welcome to the Ashlabs GUI! This is a notification exampled. You can use this to inform users about important events or actions. You can customize the title and description to fit your needs. description can be multiple lines long and will adjust its size based on the content."})
-
-    end
-
-})
-
-
-
-GUI:CreateToggle({
-
-    parent = main, 
-
-    text = "Toggle Me", 
-
-    default = false, 
-
-    callback = function(state)
-
-        print("Toggle state:", state)
-
-    end
-
-})
-
-
-
-GUI:CreateSlider({
-
-    parent = main, 
-
-    text = "Slider", 
-
-    min = 0, 
-
-    max = 100, 
-
-    default = 50, 
-
-    function(value)
-
-        print("Slider value changed:", value)
-
-    end
-
-})
-
-
-
-GUI:CreateDropdown({
-
-    parent = main, 
-
-    text = "Select Option", 
-
-    options = {"Option 1", "Option 2", "Option 3"}, 
-
-    callback = function(selected)
-
-        print("Selected option:", selected)
-
-    end
-
-})
-
-
-
-GUI:CreateKeyBind({
-
-    parent = main, 
-
-    text = "Press a Key", 
-
-    default = "K", 
-
-    callback = function(key, input, isPressed)
-
-        if isPressed then
-
-            print("Key pressed:", key)
-
-        else
-
-            print("Key released:", key)
-
-        end
-
-    end
-
-})
-
-
-
-GUI:CreateInput({
-
-    parent = main, 
-
-    text = "Enter Text", 
-
-    placeholder = "Placeholder", 
-
-    callback = function(text)
-
-        print("Input text:", text)
-
-    end
-
-})
-
-
-
-GUI:CreateParagraph({
-
-    parent = main, 
-
-    text = "This is a paragraph explaining something important. It can be multiple lines long and will adjust its size based on the content."
-
-})
-
-
-
-GUI:CreateColorPicker({
-
-    parent = main, 
-
-    text = "Pick a Color", 
-
-    default = Color3.fromRGB(255, 0, 0), 
-
-    callback = function(color)
-
-        print("Selected color:", color)
-
-    end
-
-})
-
-
-
-local settings = GUI:CreateTab("Settings", "settings")
-
-GUI:CreateSection({
-
-    parent = settings, 
-
-    text = "Settings Section"
-
-})
-
-
-
-GUI:CreateButton({
-
-    parent = settings, 
-
-    text = "Reset Settings", 
-
-    callback = function()
-
-        GUI:CreateNotify({ title = "Settings Reset", text = "All settings have been reset to default."})
-
-    end
-
-})
-
-
-
-GUI:CreateDivider({
-
-    parent = settings
-
-})
-
-
-
-GUI:CreateButton({
-
-    parent = settings, 
-
-    text = "Reset 2", 
-
-    callback = function()
-
-        GUI:CreateNotify({ title = "Settings Reset", text = "All settings have been reset to default."})
-
-    end
-
+local Window = Rayfield:CreateWindow({
+   Name = "Rayfield Example Window",
+   Icon = 0, -- Icon in Topbar. Can use Lucide Icons (string) or Roblox Image (number). 0 to use no icon (default).
+   LoadingTitle = "Rayfield Interface Suite",
+   LoadingSubtitle = "by Sirius",
+   ShowText = "Rayfield", -- for mobile users to unhide rayfield, change if you'd like
+   Theme = "Default", -- Check https://docs.sirius.menu/rayfield/configuration/themes
+
+   ToggleUIKeybind = "K", -- The keybind to toggle the UI visibility (string like "K" or Enum.KeyCode)
+
+   DisableRayfieldPrompts = false,
+   DisableBuildWarnings = false, -- Prevents Rayfield from warning when the script has a version mismatch with the interface
+
+   ConfigurationSaving = {
+      Enabled = true,
+      FolderName = nil, -- Create a custom folder for your hub/game
+      FileName = "Big Hub"
+   },
+
+   Discord = {
+      Enabled = false, -- Prompt the user to join your Discord server if their executor supports it
+      Invite = "noinvitelink", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ ABCD would be ABCD
+      RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+   },
+
+   KeySystem = true, -- Set this to true to use our key system
+   KeySettings = {
+      Title = "Untitled",
+      Subtitle = "Key System",
+      Note = "No method of obtaining the key is provided", -- Use this to tell the user how to get a key
+      FileName = "Key", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
+      SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
+      GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+      Key = {"Hello"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
+   }
 })
